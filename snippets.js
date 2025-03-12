@@ -99,6 +99,8 @@ var convertXMLtoJSONSnippet = new Snippet(
     
     // Make Sure to install these and add these and at the top of the file if they do not exist
     /*
+        npm install @types/tmp @types/xml2js @types/xmldom --save-dev
+        
         import * as fs from "fs";
         import * as tmp from "tmp";
         import { DOMParser } from "xmldom";
@@ -147,7 +149,7 @@ var convertXMLtoJSONSnippet = new Snippet(
 
     `,
     'Takes the XML dataset and turns it into JSON object for editing',
-    ['json','xml','dataset'],
+    ['json', 'xml', 'dataset'],
     "Convert XML Dataset to JSON"
 )
 
@@ -168,7 +170,9 @@ const enfocusScriptingSnippets = [
     jobLogWarningSnippet,
     jobLogErrorSnippet,
     getNameWithExtensionSnippet,
-    getNameWithOutExtensionSnippet
+    getNameWithOutExtensionSnippet,
+    getJobDatasetPathSnippet,
+    convertXMLtoJSONSnippet,
 ]
 
 module.exports = {
