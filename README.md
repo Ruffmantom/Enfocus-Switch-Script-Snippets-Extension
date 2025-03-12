@@ -1,65 +1,63 @@
-# enfocussimplesnippets README
+# Enfocus Scripting Snippets - VS Code Extension
 
-This is the README for your extension "enfocussimplesnippets". After writing up a brief description, we recommend including the following sections.
+## 📌 Overview
+This **Visual Studio Code extension** provides **auto-completion snippets** for **Enfocus Switch scripting** in **TypeScript**. It helps developers write Switch scripts faster by suggesting relevant snippets based on typed keywords.
 
-## Features
+## 🚀 Features
+- **Auto-completion for Enfocus Switch scripting**
+- **Snippets for logging, job handling, and XML processing**
+- **Triggers on any letter** for seamless snippet suggestions
+- **Detailed descriptions and documentation for each snippet**
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+## 🛠️ Installation
+1. Clone this repository or download the source files.
+2. Open the folder in **VS Code**.
+3. Run `npm install` to install dependencies (if needed).
+4. Press `F5` to launch an **Extension Development Host**.
 
-For example if there is an image subfolder under your extension project workspace:
+## 🎯 Usage
+1. Open a **TypeScript** file in VS Code.
+2. Start typing an **Enfocus Switch-related term** (e.g., `log`, `try`, `xml`).
+3. Select a snippet from the auto-complete suggestions.
+4. Press `Enter` or `Tab` to insert the snippet.
 
-\!\[feature X\]\(images/feature-x.png\)
+## 📜 Snippets Included
+| Trigger  | Snippet Functionality |
+|----------|----------------------|
+| `entc`   | Adds a Try-Catch block with `job.log` for error handling. |
+| `enli`   | Inserts a `job.log(LogLevel.Info, "...")` message. |
+| `enlw`   | Inserts a `job.log(LogLevel.Warning, "...")` message. |
+| `enle`   | Inserts a `job.log(LogLevel.Error, "...")` message. |
+| `enjne`  | Gets the job name **with** extension. |
+| `enjn`   | Gets the job name **without** extension. |
+| `enjdp`  | Gets the dataset path for a job. |
+| `encxj`  | Converts an XML dataset to a JSON object. |
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## ✨ How It Works
+- The extension **listens for typed text** and **matches it with predefined snippet tags**.
+- If a match is found, it suggests the corresponding **Enfocus Switch snippet**.
+- Selecting a snippet **inserts the predefined code block** into the file.
 
-## Requirements
+## 🔧 Development & Customization
+To add or modify snippets:
+1. Open `snippets.js`.
+2. Add new snippets following the `Snippet` class structure.
+3. Register the new snippet in the `enfocusScriptingSnippets` array.
+4. Restart VS Code to apply changes.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## 📦 Extension Structure
+```
+├── extension.js   # Main extension logic
+├── snippets.js    # Enfocus Switch snippets
+├── package.json   # Extension metadata
+└── README.md      # This documentation
+```
 
-## Extension Settings
+## ❌ Uninstallation
+To remove the extension:
+1. Open **VS Code**.
+2. Go to **Extensions (`Ctrl+Shift+X`)**.
+3. Find the extension and click **Uninstall**.
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+## 🤝 Contributions
+Feel free to **fork**, **modify**, and **submit pull requests** for improvements!
