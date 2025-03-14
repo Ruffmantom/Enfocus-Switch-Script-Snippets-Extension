@@ -100,7 +100,7 @@ var convertXMLtoJSONSnippet = new Snippet(
     // Make Sure to install these and add these and at the top of the file if they do not exist
     /*
         npm install @types/tmp @types/xml2js @types/xmldom --save-dev
-        
+
         import * as fs from "fs";
         import * as tmp from "tmp";
         import { DOMParser } from "xmldom";
@@ -154,6 +154,23 @@ var convertXMLtoJSONSnippet = new Snippet(
 )
 
 
+var getJobPathSnippet = new Snippet(
+    'engjp',
+    `let jobPath = await job.get(AccessLevel.ReadOnly);`,
+    'Gets the full path to the job',
+    ['tags'],
+    "Get Path of Job File"
+)
+
+var getPropertyValueSnippet = new Snippet(
+    'engav',
+    `let VARIABLE_NAME: string = (await flowElement.getPropertyStringValue(
+      "PROPERTY_NAME"
+    )) as string;`,
+    'Get the Property value from the',
+    ['tags'],
+    "Get a Property Value"
+)
 /*
 var Snippet = new Snippet(
     'completionItem',
@@ -173,6 +190,8 @@ const enfocusScriptingSnippets = [
     getNameWithOutExtensionSnippet,
     getJobDatasetPathSnippet,
     convertXMLtoJSONSnippet,
+    getJobPathSnippet,
+    getPropertyValueSnippet,
 ]
 
 module.exports = {
