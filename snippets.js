@@ -1,10 +1,10 @@
 class Snippet {
     constructor(completionItem, snippetString, markdownString, tags, shortText) {
-        this.completionItem = completionItem;
-        this.snippetString = snippetString;
-        this.markdownString = markdownString;
-        this.tags = tags
-        this.shortText = shortText
+        this.completionItem = completionItem; // the name or command of the snippet
+        this.snippetString = snippetString; // the actual snippet
+        this.markdownString = markdownString; // the description that shows up when hovering dropdown item
+        this.tags = tags // these help filter the snippet but is actually is broken at the moment
+        this.shortText = shortText // this is the descriptor in the drop down item line
     }
 }
 
@@ -17,15 +17,15 @@ var tryCatchSnippet = new Snippet(
         $1
         // send job on it's way
         await job.log(LogLevel.Info, "About to Send job on its way!");
-        // await job.sendToChannel(Connection.Level.Success);
+        // await job.sendToData(Connection.Level.Success);
     } catch (error) {
         await job.log(LogLevel.Error, "There was an error" + error);
-        // await job.sendToChannel(Connection.Level.Error);
+        // await job.sendToData(Connection.Level.Error);
     }
     `,
-    `Adds a Try Catch Block with a job.log Error and a job.SendToChannel Error.`,
+    `Adds a Try Catch Block with a job.log Error and a job.sendToData Error.`,
     ['enfocus', 'en', 'try', 'switch', 'entc'],
-    "Adds Try Catch sendToChannel"
+    "Adds Try Catch sendToData"
 )
 
 // Log Snips
@@ -171,14 +171,20 @@ var getPropertyValueSnippet = new Snippet(
     ['tags'],
     "Get a Property Value"
 )
+
+
+
 /*
+
+---------- Template ----------
 var Snippet = new Snippet(
-    'completionItem',
-    `snippetString`,
-    'markdownString',
-    ['tags'],
-    "shortText"
+    'COMPLETION_ITEM_HERE',
+    `SNIPPET_STRING_HERE`,
+    'MARKDOWN_STRING_HERE',
+    ['TAGS_HERE'],
+    "SHORT_TEXT_HERE"
 )
+
 */
 
 const enfocusScriptingSnippets = [
