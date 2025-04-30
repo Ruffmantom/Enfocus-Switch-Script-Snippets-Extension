@@ -1,0 +1,20 @@
+MIT License
+
+Copyright (c) 2025 Tom Ruff
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this extension and its associated files (the "Software"), to use, modify,
+merge, publish, distribute, sublicense, and/or sell copies of the Software,
+and to permit others to do the same, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHOR OR COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
+IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Note: This extension is provided free of charge for use and modification. It is intended to assist in developing Enfocus Switch Automation scripting solutions.
