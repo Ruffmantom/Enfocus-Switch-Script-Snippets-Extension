@@ -23,7 +23,7 @@
 		"automation"
 	],
   "license": "MIT",
-	"icon": "images/icon-min.png",
+	"icon": "assets/images/icon-min.png",
   "activationEvents": [
     "onLanguage:typescript"
   ],
