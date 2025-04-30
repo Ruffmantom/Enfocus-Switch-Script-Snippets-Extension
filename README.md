@@ -32,6 +32,10 @@ This **Visual Studio Code extension** provides **auto-completion snippets** for 
 | `enjn`   | Gets the job name **without** extension. |
 | `enjdp`  | Gets the dataset path for a job. |
 | `encxj`  | Converts an XML dataset to a JSON object. |
+| `engjp`  | Get full Path of Job File |
+| `engav`  | Get a flow element Property Value |
+| `enexmlf`  | Extract a XML field without npm packages |
+| `enuxmlf`  | Update a XML field without npm packages |
 
 ## ✨ How It Works
 - The extension **listens for typed text** and **matches it with predefined snippet tags**.

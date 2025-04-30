@@ -159,7 +159,7 @@ var getJobPathSnippet = new Snippet(
     `let jobPath = await job.get(AccessLevel.ReadOnly);`,
     'Gets the full path to the job',
     ['tags'],
-    "Get Path of Job File"
+    "Get full Path of Job File"
 )
 
 var getPropertyValueSnippet = new Snippet(
@@ -167,12 +167,57 @@ var getPropertyValueSnippet = new Snippet(
     `let VARIABLE_NAME: string = (await flowElement.getPropertyStringValue(
       "PROPERTY_NAME"
     )) as string;`,
-    'Get the Property value from the',
+    'Get the Property value from the flow element.',
     ['tags'],
-    "Get a Property Value"
+    "Get a flow element Property Value"
+)
+
+var updateValueInXmlString = new Snippet(
+    'enuxmlf',
+    `
+    const updateFieldValue = (jobDataXML: string, searchId: string, newValue: string): string => {
+        const fieldRegex = new RegExp(
+            '(<field[^>]*Id="' + searchId + '"[^>]*>[\\s\\S]*?<value>)(.*?)(</value>)',
+            "i"
+        );
+
+        return jobDataXML.replace(fieldRegex, (_, before, _oldValue, after) => {
+            return before + newValue + after;
+        });
+    };
+
+    `,
+    'Updates a specific field value from the XML dataset string without having to install any packages.',
+    ['update'],
+    "Update XML value from string NP"
 )
 
 
+var extractValueInXmlString = new Snippet(
+    'enexmlf',
+    `
+    const extractFieldValue = (jobDataXML: string, searchId: string, newValue: string = ""): string => {
+        const fieldRegex = new RegExp(
+            '<field[^>]*Id="' + searchId + '"[^>]*>([\\s\\S]*?)<\\/field>',
+            "i"
+        );
+        const fieldMatch = jobDataXML.match(fieldRegex);
+
+        if (fieldMatch && fieldMatch[1]) {
+            const valueMatch = fieldMatch[1].match(/<value>(.*?)<\/value>/);
+            if (valueMatch && valueMatch[1]) {
+                return valueMatch[1].trim();
+            }
+        }
+
+        return "N/A";
+    };
+
+    `,
+    'Extract a specific field value from the XML dataset string without having to install any packages.',
+    ['extract'],
+    "Extract XML value from string NP"
+)
 
 /*
 
@@ -198,6 +243,8 @@ const enfocusScriptingSnippets = [
     convertXMLtoJSONSnippet,
     getJobPathSnippet,
     getPropertyValueSnippet,
+    updateValueInXmlString,
+    extractValueInXmlString,
 ]
 
 module.exports = {
