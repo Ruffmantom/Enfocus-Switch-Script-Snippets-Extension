@@ -2,13 +2,28 @@
   "name": "enfocussimplesnippets",
   "displayName": "EnfocusSimpleSnippets",
   "description": "This Extension helps the user get quick code snippets commonly used when creating custom scripts",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "publisher": "ruffWebDev",
+  "author": {
+		"name": "Tom Ruff",
+		"email": "tom@idsignco.com",
+		"url": "https://github.com/Ruffmantom"
+	},
   "engines": {
     "vscode": "^1.98.0"
   },
   "categories": [
     "Other"
   ],
+  "keywords": [
+		"enfocus scripting",
+		"enfocus",
+		"switch automation",
+		"enfocus automation",
+		"automation"
+	],
+  "license": "MIT",
+	"icon": "images/icon-min.png",
   "activationEvents": [
     "onLanguage:typescript"
   ],
