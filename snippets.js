@@ -168,7 +168,7 @@ var getPropertyValueSnippet = new Snippet(
       "PROPERTY_NAME"
     )) as string;`,
     'Get the Property value from the flow element.',
-    ['tags'],
+    ['enfocus', 'property','value'],
     "Get a flow element Property Value"
 )
 
