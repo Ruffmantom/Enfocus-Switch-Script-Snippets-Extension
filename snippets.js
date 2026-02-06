@@ -10,7 +10,7 @@ class Snippet {
 
 // try catch snips
 var tryCatchSnippet = new Snippet(
-    'entc',
+    'en.tryCatchLog',
     `
     try {
         // try code here
@@ -24,76 +24,82 @@ var tryCatchSnippet = new Snippet(
     }
     `,
     `Adds a Try Catch Block with a job.log Error and a job.sendToData Error.`,
-    ['enfocus', 'en', 'try', 'switch', 'entc'],
-    "Adds Try Catch sendToData"
+    ['enfocus', 'en', 'try', 'catch', 'trycatch', 'log', 'error'],
+    "Try/catch with job.log"
 )
 
 // Log Snips
 var jobLogInfoSnippet = new Snippet(
-    'enli',
+    'en.logInfo',
     `
     await job.log(LogLevel.Info, "$1")
     `,
     'Add a job.log Info message',
-    ['enfocus', 'en', 'log', 'switch', 'info', 'enli'],
-    "log info"
+    ['enfocus', 'en', 'log', 'info'],
+    "job.log info"
 )
 
 
 var jobLogWarningSnippet = new Snippet(
-    'enlw',
+    'en.logWarn',
     `
     await job.log(LogLevel.Warning, "$1")
     `,
     'Add a job.log Warning message',
-    ['enfocus', 'en', 'log', 'switch', 'warning', 'enlw'],
-    "log warning"
+    ['enfocus', 'en', 'log', 'warn', 'warning'],
+    "job.log warning"
 )
 
 var jobLogErrorSnippet = new Snippet(
-    'enle',
+    'en.logError',
     `
     await job.log(LogLevel.Error, "$1")
     `,
     'Add a job.log Error message',
-    ['enfocus', 'en', 'log', 'switch', 'error', 'enle'],
-    "log error"
+    ['enfocus', 'en', 'log', 'error'],
+    "job.log error"
 )
 
 var getNameWithExtensionSnippet = new Snippet(
-    'enjne',
+    'en.jobNameWithExt',
     `
     // get the file name
     let jobName: string = await job.getName(true)`,
     'Adds jobName Variable with the extension. Example: "my-artwork.pdf"',
-    ['name'],
-    "Gets name of Job with extension"
+    ['enfocus', 'en', 'job', 'name', 'extension', 'filename'],
+    "Job name with extension"
 )
 
 var getNameWithOutExtensionSnippet = new Snippet(
-    'enjn',
+    'en.jobNameNoExt',
     `
     // get the file name without extension
     let jobName: string = await job.getName(false)`,
     'Adds jobName Variable with the extension. Example: "my-artwork"',
-    ['name'],
-    "Gets name of Job with out extension"
+    ['enfocus', 'en', 'job', 'name', 'noext', 'filename'],
+    "Job name without extension"
 )
 
 
 var getJobDatasetPathSnippet = new Snippet(
-    'enjdp',
+    'en.datasetPath',
     `
     // get the jobs dataset path
-    const jobDataPath: string = await job.getDataSet("DATASET_NAME_HERE", AccessLevel.ReadOnly)
+    const DATASET: string = await job.getDataset("DATASET_NAME", AccessLevel.ReadOnly)
+    // make sure dataset is there
+    if (!DATASET) {
+        await job.log(LogLevel.Error, "** Could not find the path for the standardized data")
+    }
+    // Read the file synchronously
+    const DATASET_READY = fs.readFileSync(DATASET, 'utf-8');
     `,
     'Adds the path of specified dataset',
-    ['tags'],
-    "Get full path of the jobs Dataset"
+    ['enfocus', 'en', 'dataset', 'path', 'file'],
+    "Get dataset full path"
 )
 
 var convertXMLtoJSONSnippet = new Snippet(
-    'encxj',
+    'en.xmlToJson',
     `
     // ****************
     
@@ -149,31 +155,31 @@ var convertXMLtoJSONSnippet = new Snippet(
 
     `,
     'Takes the XML dataset and turns it into JSON object for editing',
-    ['json', 'xml', 'dataset'],
-    "Convert XML Dataset to JSON"
+    ['enfocus', 'en', 'json', 'xml', 'dataset'],
+    "Convert XML dataset to JSON"
 )
 
 
 var getJobPathSnippet = new Snippet(
-    'engjp',
+    'en.jobPath',
     `let jobPath = await job.get(AccessLevel.ReadOnly);`,
     'Gets the full path to the job',
-    ['tags'],
-    "Get full Path of Job File"
+    ['enfocus', 'en', 'job', 'path', 'file'],
+    "Get job file path"
 )
 
 var getPropertyValueSnippet = new Snippet(
-    'engav',
+    'en.flowPropValue',
     `let VARIABLE_NAME: string = (await flowElement.getPropertyStringValue(
       "PROPERTY_NAME"
     )) as string;`,
     'Get the Property value from the flow element.',
-    ['enfocus', 'property','value'],
-    "Get a flow element Property Value"
+    ['enfocus', 'en', 'flow', 'property', 'value'],
+    "Flow element property value"
 )
 
 var updateValueInXmlString = new Snippet(
-    'enuxmlf',
+    'en.xmlUpdateValue',
     `
     const updateFieldValue = (jobDataXML: string, searchId: string, newValue: string): string => {
         const fieldRegex = new RegExp(
@@ -188,13 +194,13 @@ var updateValueInXmlString = new Snippet(
 
     `,
     'Updates a specific field value from the XML dataset string without having to install any packages.',
-    ['update'],
-    "Update XML value from string NP"
+    ['enfocus', 'en', 'xml', 'update', 'field', 'value'],
+    "Update XML value from string"
 )
 
 
 var extractValueInXmlString = new Snippet(
-    'enexmlf',
+    'en.xmlExtractValue',
     `
     const extractFieldValue = (jobDataXML: string, searchId: string, newValue: string = ""): string => {
         const fieldRegex = new RegExp(
@@ -215,9 +221,51 @@ var extractValueInXmlString = new Snippet(
 
     `,
     'Extract a specific field value from the XML dataset string without having to install any packages.',
-    ['extract'],
-    "Extract XML value from string NP"
+    ['enfocus', 'en', 'xml', 'extract', 'field', 'value'],
+    "Extract XML value from string"
 )
+var extractTagValueInXmlString = new Snippet(
+    'en.xmlExtractTag',
+    `
+    const extractTagValue = async (xml, tagName) => {
+        const tagRegex = new RegExp(\`<\${tagName}>(.*?)<\\/\\${tagName}>\`, "s");
+        await logger(\`About to try and match: \${tagRegex}\`);
+
+        const match = xml.match(tagRegex);
+
+        if (match) {
+            const value = match[1]?.trim();
+            if (value) {
+                await logger(\`Found value for \${tagName}: "\${value}"\`);
+                return value;
+            } else {
+                await logger(\`Tag \${tagName} is empty. Returning empty string.\`);
+                return "";
+            }
+        } else {
+            await logger(\`Could not find \${tagName} in XML. Returning undefined.\`);
+            return undefined;
+        }
+    };
+    `,
+    'Extract a specific field value from the XML dataset string without having to install any packages.',
+    ['enfocus', 'en', 'xml', 'extract', 'tag', 'value'],
+    "Extract XML tag value"
+)
+var addLogger = new Snippet(
+    'en.addLogger',
+    `
+    const logger = async (log: string) => {
+        await job.log(LogLevel.Info, log)
+    }
+    `
+    ,
+    'Simplifies the job.log function',
+    ['enfocus', 'en', 'log', 'helper'],
+    "job.log helper"
+)
+
+
 
 /*
 
@@ -245,6 +293,8 @@ const enfocusScriptingSnippets = [
     getPropertyValueSnippet,
     updateValueInXmlString,
     extractValueInXmlString,
+    extractTagValueInXmlString,
+    addLogger,
 ]
 
 module.exports = {
