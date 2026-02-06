@@ -2,7 +2,7 @@
   "name": "enfocussimplesnippets",
   "displayName": "EnfocusSimpleSnippets",
   "description": "This Extension helps the user get quick code snippets commonly used when creating custom scripts",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "publisher": "ruffWebDev",
   "author": {
 		"name": "Tom Ruff",
@@ -24,13 +24,6 @@
 	],
   "license": "MIT",
 	"icon": "assets/images/icon-min.png",
-  "activationEvents": [
-    "onLanguage:typescript",
-    "onLanguage:typescriptreact",
-    "onLanguage:javascript",
-    "onLanguage:javascriptreact"
-  ],
-  "main": "./extension.js",
   "contributes": {
     "commands": [
       {
@@ -38,15 +31,22 @@
         "title": "Hello World"
       }
     ],
-    "languages": [
+    "snippets": [
       {
-        "id": "typescript",
-        "extensions": [
-          ".ts"
-        ],
-        "aliases": [
-          "TypeScript"
-        ]
+        "language": "typescript",
+        "path": "./snippets/enfocus.code-snippets"
+      },
+      {
+        "language": "typescriptreact",
+        "path": "./snippets/enfocus.code-snippets"
+      },
+      {
+        "language": "javascript",
+        "path": "./snippets/enfocus.code-snippets"
+      },
+      {
+        "language": "javascriptreact",
+        "path": "./snippets/enfocus.code-snippets"
       }
     ]
   },

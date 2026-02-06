@@ -1,0 +1,214 @@
+{
+  "Try Catch With job.log": {
+    "prefix": "en.tryCatchLog",
+    "body": [
+      "try {",
+      "    // try code here",
+      "    $1",
+      "    // send job on it's way",
+      "    await job.log(LogLevel.Info, \"About to Send job on its way!\");",
+      "    // await job.sendToData(Connection.Level.Success);",
+      "} catch (error) {",
+      "    await job.log(LogLevel.Error, \"There was an error\" + error);",
+      "    // await job.sendToData(Connection.Level.Error);",
+      "}"
+    ],
+    "description": "Adds a try/catch block with job.log and commented sendToData calls."
+  },
+  "job.log Info": {
+    "prefix": "en.logInfo",
+    "body": [
+      "await job.log(LogLevel.Info, \"$1\")"
+    ],
+    "description": "Add a job.log Info message."
+  },
+  "job.log Warning": {
+    "prefix": "en.logWarn",
+    "body": [
+      "await job.log(LogLevel.Warning, \"$1\")"
+    ],
+    "description": "Add a job.log Warning message."
+  },
+  "job.log Error": {
+    "prefix": "en.logError",
+    "body": [
+      "await job.log(LogLevel.Error, \"$1\")"
+    ],
+    "description": "Add a job.log Error message."
+  },
+  "Job Name With Extension": {
+    "prefix": "en.jobNameWithExt",
+    "body": [
+      "// get the file name",
+      "let jobName: string = await job.getName(true)"
+    ],
+    "description": "Adds jobName variable with the extension. Example: \"my-artwork.pdf\""
+  },
+  "Job Name Without Extension": {
+    "prefix": "en.jobNameNoExt",
+    "body": [
+      "// get the file name without extension",
+      "let jobName: string = await job.getName(false)"
+    ],
+    "description": "Adds jobName variable without the extension. Example: \"my-artwork\""
+  },
+  "Get Dataset Path": {
+    "prefix": "en.datasetPath",
+    "body": [
+      "// get the jobs dataset path",
+      "const DATASET: string = await job.getDataset(\"DATASET_NAME\", AccessLevel.ReadOnly)",
+      "// make sure dataset is there",
+      "if (!DATASET) {",
+      "    await job.log(LogLevel.Error, \"** Could not find the path for the standardized data\")",
+      "}",
+      "// Read the file synchronously",
+      "const DATASET_READY = fs.readFileSync(DATASET, \"utf-8\");"
+    ],
+    "description": "Adds the path of a specified dataset and reads it."
+  },
+  "Convert XML Dataset to JSON": {
+    "prefix": "en.xmlToJson",
+    "body": [
+      "// ****************",
+      "",
+      "// Make Sure to install these and add these and at the top of the file if they do not exist",
+      "/*",
+      "    npm install @types/tmp @types/xml2js @types/xmldom --save-dev",
+      "",
+      "    import * as fs from \"fs\";",
+      "    import * as tmp from \"tmp\";",
+      "    import { DOMParser } from \"xmldom\";",
+      "    import { parseStringPromise } from \"xml2js\";",
+      "*/",
+      "",
+      "// Helper Function to find a specific value",
+      "const extractFieldValue = (jobData: any, searchId: string): string => {",
+      "    const field = jobData[\"field-list\"][\"field\"].find(",
+      "    (f: any) => f.$.Id === searchId",
+      ");",
+      "    return field ? field.value.toString() : \"N/A\";",
+      "};",
+      "",
+      "// function to convert XML to JSON",
+      "async function convertXmlToJson(xmlString: string): Promise<Record<string, any>> {",
+      "    try {",
+      "        const jsonResult = await parseStringPromise(xmlString, {explicitArray: false});",
+      "        // this will return an object",
+      "        return jsonResult;",
+      "    } catch (error) {",
+      "        return {",
+      "            message: \"There was an error converting the XML: \" + error",
+      "        }",
+      "    }",
+      "}",
+      "",
+      "// Retrieve the XML metadata file associated with the job",
+      "const metadataPath: string | null = await job.getDataset(\"DATASET_NAME_HERE\", AccessLevel.ReadOnly);",
+      "",
+      "// Read the XML metadata file",
+      "const metadataContent: string = fs.readFileSync(metadataPath, \"utf-8\");",
+      "",
+      "// Parse XML metadata using DOMParser",
+      "const parser: DOMParser = new DOMParser();",
+      "const xmlDOM = parser.parseFromString(metadataContent, \"text/xml\");",
+      "",
+      "// Make XML a string to be converted",
+      "const xmlString: string = xmlDOM.toString();",
+      "",
+      "// Convert XML to JSON",
+      "const metadataJson: Record<string, any> = await convertXmlToJson(xmlString);",
+      "",
+      "// ****************"
+    ],
+    "description": "Takes the XML dataset and turns it into a JSON object for editing."
+  },
+  "Get Job File Path": {
+    "prefix": "en.jobPath",
+    "body": [
+      "let jobPath = await job.get(AccessLevel.ReadOnly);"
+    ],
+    "description": "Gets the full path to the job."
+  },
+  "Flow Element Property Value": {
+    "prefix": "en.flowPropValue",
+    "body": [
+      "let VARIABLE_NAME: string = (await flowElement.getPropertyStringValue(",
+      "  \"PROPERTY_NAME\"",
+      ")) as string;"
+    ],
+    "description": "Get the property value from the flow element."
+  },
+  "Update XML Field Value (String)": {
+    "prefix": "en.xmlUpdateValue",
+    "body": [
+      "const updateFieldValue = (jobDataXML: string, searchId: string, newValue: string): string => {",
+      "    const fieldRegex = new RegExp(",
+      "        '(<field[^>]*Id=\"' + searchId + '\"[^>]*>[\\\\s\\\\S]*?<value>)(.*?)(</value>)',",
+      "        \"i\"",
+      "    );",
+      "",
+      "    return jobDataXML.replace(fieldRegex, (_, before, _oldValue, after) => {",
+      "        return before + newValue + after;",
+      "    });",
+      "};"
+    ],
+    "description": "Update a specific field value from an XML dataset string without extra packages."
+  },
+  "Extract XML Field Value (String)": {
+    "prefix": "en.xmlExtractValue",
+    "body": [
+      "const extractFieldValue = (jobDataXML: string, searchId: string, newValue: string = \"\"): string => {",
+      "    const fieldRegex = new RegExp(",
+      "        '<field[^>]*Id=\"' + searchId + '\"[^>]*>([\\\\s\\\\S]*?)<\\\\/field>',",
+      "        \"i\"",
+      "    );",
+      "    const fieldMatch = jobDataXML.match(fieldRegex);",
+      "",
+      "    if (fieldMatch && fieldMatch[1]) {",
+      "        const valueMatch = fieldMatch[1].match(/<value>(.*?)<\\\\/value>/);",
+      "        if (valueMatch && valueMatch[1]) {",
+      "            return valueMatch[1].trim();",
+      "        }",
+      "    }",
+      "",
+      "    return \"N/A\";",
+      "};"
+    ],
+    "description": "Extract a specific field value from an XML dataset string without extra packages."
+  },
+  "Extract XML Tag Value (String)": {
+    "prefix": "en.xmlExtractTag",
+    "body": [
+      "const extractTagValue = async (xml, tagName) => {",
+      "    const tagRegex = new RegExp(`<${tagName}>(.*?)<\\\\/${tagName}>`, \"s\");",
+      "    await logger(`About to try and match: ${tagRegex}`);",
+      "",
+      "    const match = xml.match(tagRegex);",
+      "",
+      "    if (match) {",
+      "        const value = match[1]?.trim();",
+      "        if (value) {",
+      "            await logger(`Found value for ${tagName}: \"${value}\"`);",
+      "            return value;",
+      "        } else {",
+      "            await logger(`Tag ${tagName} is empty. Returning empty string.`);",
+      "            return \"\";",
+      "        }",
+      "    } else {",
+      "        await logger(`Could not find ${tagName} in XML. Returning undefined.`);",
+      "        return undefined;",
+      "    }",
+      "};"
+    ],
+    "description": "Extract a specific tag value from an XML dataset string without extra packages."
+  },
+  "job.log Helper": {
+    "prefix": "en.addLogger",
+    "body": [
+      "const logger = async (log: string) => {",
+      "    await job.log(LogLevel.Info, log)",
+      "}"
+    ],
+    "description": "Simplifies the job.log function."
+  }
+}
