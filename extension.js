@@ -5,7 +5,12 @@ function activate(context) {
     // console.log("Extension is now active!");
 
     let provider = vscode.languages.registerCompletionItemProvider(
-        { scheme: "file", language: "typescript" }, // Target TypeScript
+        [
+            { language: "typescript" },
+            { language: "typescriptreact" },
+            { language: "javascript" },
+            { language: "javascriptreact" }
+        ],
         {
             provideCompletionItems(document, position) {
                 // console.log("Completion triggered!");
